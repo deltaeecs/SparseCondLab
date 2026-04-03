@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sparsecondlab"
+version = "0.1.0"
+description = "Toolkit for comparing conditioning of large sparse complex matrices"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy",
+    "scipy",
+    "pandas",
+    "matplotlib[all]",
+]
+
+[project.optional-dependencies]
+hpc = ["petsc4py", "slepc4py", "mpi4py"]
+test = ["pytest"]
+
+[project.scripts]
+scl-compare = "sparsecondlab.cli:main"
+scl-benchmark = "sparsecondlab.cli:benchmark_main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

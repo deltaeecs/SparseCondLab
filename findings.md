@@ -1,0 +1,22 @@
+# Findings
+
+- The repository currently exposes only [README.md](README.md), so there are no existing package conventions to preserve.
+- The project is an open-source Python toolkit for sparse complex-matrix conditioning comparisons.
+- Documented inputs include SciPy sparse matrices, Matrix Market files, NPZ files, and MUMPS-style distributed matrix input.
+- Documented dependencies are `scipy`, `numpy`, `pandas`, `matplotlib[all]`, with optional `petsc4py`, `slepc4py`, and `mpi4py`.
+- No build or test commands were documented before this workspace bootstrap.
+- The repository now has a src-layout Python package with a compare CLI and pytest coverage.
+- Tests intentionally use a checked-in Matrix Market fixture based on a real sparse example rather than only synthetic data.
+- The shard manifest schema is now versioned with `format = sparsecondlab-shards` and `version = 1`.
+- The compare CLI now reports `condest_1` plus iterative benchmark results in flat CSV or JSON rows.
+- The library API now exposes `condest_2` alongside `condest_1` for 2-norm condition numbers.
+- `condest_2` no longer switches to a sparse-specific approximation path; it computes the exact dense 2-norm condition number explicitly.
+- The repo now has a dedicated Krylov benchmark flow with `scl-benchmark`, log-log trend fitting, and 1e6 DOF runtime extrapolation from smaller FEM samples.
+- The benchmark flow now supports realistic generated sparse families rather than only block-diagonal repeats of tiny fixtures.
+- `anisotropic-poisson-2d` provides a PDE-like benchmark family that scales more realistically while remaining cheap enough to sample on a laptop.
+- `coupled-diffusion-2d` provides a complex block-coupled sparse family for correctness validation and heavier benchmark stress.
+- `convection-diffusion-2d` now provides a real nonsymmetric transport-dominated sparse family for additional benchmark realism.
+- Correctness validation now includes Dirichlet Poisson and structured coupled sparse systems, not only diagonal matrices.
+- The benchmark CLI now supports repeated `--generated-family` flags and can emit one suite-level JSON/markdown/figure artifact across multiple families.
+- The current formal aggregate report is `docs/reports/2026-04-03-krylov-benchmark-suite-report.md` with figure `docs/reports/figures/krylov_benchmark_suite_trend.png`.
+- Repository hygiene is now enforced through `.gitignore`, and local Python cache/build artifacts are excluded from git status.

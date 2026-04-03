@@ -1,0 +1,20 @@
+{
+    "format": "sparsecondlab-shards",
+    "version": 1,
+    "shape": [
+        10,
+        10
+    ],
+    "shards": [
+        {
+            "path": "real_example.mtx",
+            "row_offset": 0,
+            "col_offset": 0
+        },
+        {
+            "path": "symmetric_example.mtx",
+            "row_offset": 5,
+            "col_offset": 5
+        }
+    ]
+}
